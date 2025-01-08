@@ -3,251 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login and Sign-Up Page</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3f4f6;
+            background-color: #f2f2f2;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
-
-        .container {
-            background: #ffffff;
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .container h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333333;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555555;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .form-group input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        .error-message {
-            color: #d9534f;
-            font-size: 14px;
-            display: none;
-        }
-
-        .button {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        .button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-
-        .link {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .link a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .link a:hover {
-            text-decoration: underline;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
+        .login-container {
+            background-color: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .login-container h2 {
             text-align: center;
         }
-
-        .popup h2 {
-            margin: 0 0 10px;
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-
-        .popup button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #ffffff;
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
         }
-
-        .popup button:hover {
-            background-color: #0056b3;
+        .login-button:hover {
+            background-color: #45a049;
         }
-
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
+        .error-message {
+            color: red;
+            font-size: 12px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="loginContainer">
-        <h1>Login</h1>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-                <div class="error-message" id="usernameError">Username is required.</div>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-                <div class="error-message" id="passwordError">Password is required.</div>
-            </div>
-            <button type="button" class="button" onclick="validateLoginForm()">Login</button>
-        </form>
-        <div class="link">
-            <span>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></span>
-        </div>
-    </div>
 
-    <div class="container hidden" id="signUpContainer">
-        <h1>Sign Up</h1>
-        <form id="signUpForm">
-            <div class="form-group">
-                <label for="newUsername">Username</label>
-                <input type="text" id="newUsername" name="newUsername" required>
-                <div class="error-message" id="newUsernameError">Username is required.</div>
-            </div>
-            <div class="form-group">
-                <label for="newPassword">Password</label>
-                <input type="password" id="newPassword" name="newPassword" required>
-                <div class="error-message" id="newPasswordError">Password is required.</div>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-                <div class="error-message" id="confirmPasswordError">Passwords must match.</div>
-            </div>
-            <button type="button" class="button" onclick="validateSignUpForm()">Sign Up</button>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return validateForm()">
+            <input type="text" id="username" class="form-input" placeholder="Username" required>
+            <input type="password" id="password" class="form-input" placeholder="Password" required>
+            <button type="submit" class="login-button">Login</button>
+            <div class="error-message" id="error-message"></div>
         </form>
-        <div class="link">
-            <span>Already have an account? <a href="#" onclick="showLogin()">Login</a></span>
-        </div>
-    </div>
-
-    <div class="popup-overlay hidden" id="popupOverlay"></div>
-    <div class="popup hidden" id="popup">
-        <h2 id="popupMessage">Popup Message</h2>
-        <button onclick="closePopup()">Close</button>
     </div>
 
     <script>
-        function validateLoginForm() {
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var errorMessage = document.getElementById("error-message");
 
-            const usernameError = document.getElementById('usernameError');
-            const passwordError = document.getElementById('passwordError');
-
-            let isValid = true;
-
-            if (!username) {
-                usernameError.style.display = 'block';
-                isValid = false;
+            // Example validation - you can replace this with actual logic
+            if (username === "admin" && password === "password") {
+                alert("Login successful!");
+                return true;
             } else {
-                usernameError.style.display = 'none';
-            }
-
-            if (!password) {
-                passwordError.style.display = 'block';
-                isValid = false;
-            } else {
-                passwordError.style.display = 'none';
-            }
-
-            if (isValid) {
-                showPopup('Login successful!');
+                errorMessage.textContent = "Invalid username or password!";
+                return false;
             }
         }
+    </script>
 
-        function validateSignUpForm() {
-            const newUsername = document.getElementById('newUsername').value.trim();
-            const newPassword = document.getElementById('newPassword').value.trim();
-            const confirmPassword = document.getElementById('confirmPassword').value.trim();
-
-            const newUsernameError = document.getElementById('newUsernameError');
-            const newPasswordError = document.getElementById('newPasswordError');
-            const confirmPasswordError = document.getElementById('confirmPasswordError');
-
-            let isValid = true;
-
-            if (!newUsername) {
-                newUsernameError.style.display = 'block';
-                isValid = false;
-            } else {
-                newUsernameError.style.display = 'none';
-            }
-
-            if (!newPassword) {
-                newPasswordError.style.display = 'block';
-                isValid = false;
-            } else {
-                newPasswordError.style.display = 'none';
-            }
-
-            if (new
+</body>
+</html>
